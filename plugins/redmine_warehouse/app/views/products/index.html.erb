@@ -1,0 +1,19 @@
+<h2>ProductsController#index</h2>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Price</th>
+    <th>Amount</th>
+    <th>Date</th>
+    <th>Issue</th>
+  </tr>
+  <% @products.each do |product| %>
+  <tr>
+    <td><%= product.title %></td>
+    <td><%= product.price %></td>
+    <td><%= product.amount %></td>
+    <td><%= product.release_date %></td>
+    <td><%= link_to product.issue.subject, issue_path(product.issue.id) %></td>
+  </tr>
+  <% end %>
+  </table>
