@@ -6,5 +6,7 @@ Redmine::Plugin.register :redmine_warehouse do
   url 'http://example.com/path/to/plugin'
   author_url 'http://example.com/about'
 
-  menu :application_menu, :warehouse, { controller: 'products', action: 'index' }, caption: 'Warehouse'
+  #permission :products, { products: [:index] }, public: true
+  permission :view_products, products: :index
+  menu :project_menu , :products, { controller: 'products', action: 'index' }, caption: 'Warehouse', param: :project_id
 end

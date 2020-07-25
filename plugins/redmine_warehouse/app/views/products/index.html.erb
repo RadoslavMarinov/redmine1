@@ -13,7 +13,9 @@
     <td><%= product.price %></td>
     <td><%= product.amount %></td>
     <td><%= product.release_date %></td>
-    <td><%= link_to product.issue.subject, issue_path(product.issue.id) %></td>
+    <%unless product.issue.nil? %>
+      <td><%= link_to product.issue.subject  , issue_path(product) %></td>
+    <%end%>
   </tr>
   <% end %>
   </table>
