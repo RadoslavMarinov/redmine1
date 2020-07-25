@@ -11,6 +11,7 @@ Redmine::Plugin.register :redmine_warehouse do
   permission :edit_products, products: :edit, public: true
   permission :update_products, products: :update, public: true
   permission :create_products, products: [:new, :create], public: true
+  permission :delete_products, products: [:destroy], public: true
 
   menu :project_menu , :products, { controller: 'products', action: 'index' }, caption: 'Warehouse', param: :project_id
 end

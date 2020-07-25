@@ -7,16 +7,20 @@
     <th>Amount</th>
     <th>Date</th>
     <th>Issue</th>
+    <th></th>
   </tr>
   <% @products.each do |product| %>
   <tr>
     <td><%= link_to product.title, edit_product_path(product, :project_id => @project) %></td>
     <td><%= product.price %></td>
     <td><%= product.amount %></td>
-    <td><%= product.release_date %></td>
-    <%unless product.issue.nil? %>
+    <td><%=  strtime(product.release_date) %></td>
+    <%if not product.issue.nil? %>
       <td><%= link_to product.issue.subject, issue_path(product) %></td>
+      <%else%>
+      <td></td>
     <%end%>
+    <td><%= delete_link product_path(product, :project_id => @project) %></td>
   </tr>
   <% end %>
   </table>

@@ -5,7 +5,6 @@
   <%= form.text_field :title, placeholder: "Title", value:  @product.title %>
   <%= form.text_field :price, placeholder: "Price", value:  @product.price %>
   <%= form.text_field :amount, placeholder: "Amount", value:  @product.amount %>
-  <%= form.text_field :release_date, placeholder: "Release Date", value:  @product.release_date %>
-
+  <%= form.date_field :release_date, placeholder: "Release Date", value:  @product.release_date %>
   <%= form.submit %>
 <% end %>

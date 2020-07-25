@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :find_project, :authorize, only: [:index, :create, :new, :edit, :update]
-  before_action :find_product, only: [:show, :edit, :update]
+  before_action :find_project, :authorize, only: [:index, :create, :destroy, :new, :edit, :update]
+  before_action :find_product, only: [:show, :edit,:destroy, :update]
 
   def index
     @products = Product.all
@@ -20,20 +20,21 @@ class ProductsController < ApplicationController
   end
 
   def update
-
-    puts params
     @product.update(product_params)
     flash[:notice] = l(:notice_successful_update)
     redirect_to products_path(:project_id => @project)
   end
 
   def create
-    # puts "!!!!!!!!!!!!!!!!!!!!"
-    # puts params[:product]["project_id"]
-    # puts "????????????????????"
-    # @project = Project.find(params[:product]["project_id"])
+
     product = Product.create(product_params)
     flash[:notice] = l(:notice_successful_create)
+    redirect_to products_path(:project_id =>  @project)
+  end
+
+  def destroy
+    @product.destroy
+    flash[:notice] = l(:notice_successful_delete)
     redirect_to products_path(:project_id =>  @project)
   end
 
