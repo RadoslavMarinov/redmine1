@@ -2,4 +2,4 @@
 * installation: https://www.redmine.org/projects/redmine/wiki/RedmineInstall
 
 ## RUN:
-* bundle exec rails server webrick -e production
+* bundle exec rails server webrick -e <development|production>

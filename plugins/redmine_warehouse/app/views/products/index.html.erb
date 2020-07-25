@@ -1,4 +1,5 @@
-<h2>ProductsController#index</h2>
+<h2>Products</h2>
+<%= link_to(l(:add_new_product), new_product_path, :class => 'icon icon-add') %>
 <table>
   <tr>
     <th>Title</th>
@@ -6,16 +7,21 @@
     <th>Amount</th>
     <th>Date</th>
     <th>Issue</th>
+    <th>link</th>
+
   </tr>
   <% @products.each do |product| %>
   <tr>
-    <td><%= product.title %></td>
+    <td><%= link_to product.title, product_path(product) %></td>
     <td><%= product.price %></td>
     <td><%= product.amount %></td>
     <td><%= product.release_date %></td>
     <%unless product.issue.nil? %>
       <td><%= link_to product.issue.subject  , issue_path(product) %></td>
     <%end%>
+    <td><%= link_to "edit", edit_product_path(product) %></td>
+
+
   </tr>
   <% end %>
   </table>
