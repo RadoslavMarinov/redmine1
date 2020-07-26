@@ -1,8 +1,19 @@
 <h2>Products</h2>
 <%= link_to(l(:add_new_product), new_product_path(:project_id => @project), :class => 'icon icon-add') %>
+
+<%= form_tag(products_path(), { :method => :get, :id => 'products_form'}) do %>
+  <fieldset>
+  <%= hidden_field_tag "project_id", "#{@project.identifier}" %>
+    <label for='name'><%= l(:label_prodct) %>:</label>
+    <%= text_field_tag 'name', params[:name],  required: true, minlength: 3 , maxlength: 20,:size => 20 %>
+    <%= submit_tag l(:button_apply), :class => "small", :name => nil %>
+     <%= link_to l(:button_clear), products_path(:project_id => @project), :class => 'icon icon-reload' %>
+  </fieldset>
+<%end%>
+
 <table>
   <tr>
-    <th>Title</th>
+    <th><%=link_to "Title", products_path( params.permit(:project_id, :name).merge(:sort_title => toggle_sort_title)) %></th>
     <th>Price</th>
     <th>Amount</th>
     <th>Date</th>

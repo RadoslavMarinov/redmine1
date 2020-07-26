@@ -3,7 +3,16 @@ class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit,:destroy, :update]
 
   def index
-    @products = Product.all
+    if params.has_key?(:name)
+      puts ">>>>\n\nYes there is a name in the parameters #{params[:name]}\n\n"
+      @products = Product.title_includes(params[:name])
+    else
+      @products = Product.all
+    end 
+    if params.has_key?(:sort_title)
+      puts ">>>>\n\nYes there is a SORT in the parameters #{params[:sort_title]}\n\n"
+      @products = @products.order(:title => params[:sort_title])
+    end
   end
 
   def show
