@@ -1,6 +1,7 @@
 <h2>Products</h2>
-<%= link_to(l(:add_new_product), new_product_path(:project_id => @project), :class => 'icon icon-add') %>
-
+<p class="buttons">
+  <%= link_to(l(:add_new_product), new_product_path(:project_id => @project), :class => 'icon icon-add') %>
+</p>
 <%= form_tag(products_path(), { :method => :get, :id => 'products_form'}) do %>
   <fieldset>
   <%= hidden_field_tag "project_id", "#{@project.identifier}" %>
@@ -11,7 +12,7 @@
   </fieldset>
 <%end%>
 
-<table>
+<table class="list">
   <tr>
     <th><%=link_to "Title", products_path( params.permit(:project_id, :name).merge(:sort_title => toggle_sort_title)) %></th>
     <th>Price</th>

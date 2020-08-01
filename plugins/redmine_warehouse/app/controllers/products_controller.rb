@@ -16,12 +16,10 @@ class ProductsController < ApplicationController
   end
 
   def show
-    #@product = Product.find(params[:id])
   end
 
   def edit
 
-    #@product = Product.find(params[:id])
   end
 
   def new
@@ -29,24 +27,24 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product.update(product_params)
-    flash[:notice] = l(:notice_successful_update)
-    redirect_to products_path(:project_id => @project)
+    success = @product.update(product_params)
+    if success
+      flash[:notice] = l(:notice_successful_update)
+      redirect_to products_path(:project_id => @project)
+    else
+      flash[:error] = @product.errors.full_messages[0]
+      redirect_to new_product_path(:project_id =>  @project)
+    end
   end
 
   def create
-
-    product = Product.new(product_params)
-    if(product.valid?)
-      product.save
+    @product = Product.new(product_params)
+    if(@product.valid?)
+      @product.save
       flash[:notice] = l(:notice_successful_create)
       redirect_to products_path(:project_id =>  @project)
     else
-      puts "\n\n>>>>>>>>>>>>>>>>>"
-      puts " Errors full message is a: #{product.errors.full_messages.class }"
-      puts " Full message: #{product.errors.full_messages }"
-      puts "<<<<<<<<<<<<<<<<<\n\n\n"
-      flash[:error] = product.errors.full_messages[0]
+      flash[:error] = @product.errors.full_messages[0]
       redirect_to new_product_path(:project_id =>  @project)
     end
   end
