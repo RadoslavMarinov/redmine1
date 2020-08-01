@@ -25,12 +25,8 @@
     <td><%= link_to product.title, edit_product_path(product, :project_id => @project) %></td>
     <td><%= product.price %></td>
     <td><%= product.amount %></td>
-    <td><%=  strtime(product.release_date) %></td>
-    <%if not product.issue.nil? %>
-      <td><%= link_to product.issue.subject, issue_path(product) %></td>
-      <%else%>
-      <td></td>
-    <%end%>
+    <td><%=  get_release_date(product) %></td>
+    <td><%= get_issue_link(product) %></td>
     <td><%= delete_link product_path(product, :project_id => @project) %></td>
   </tr>
   <% end %>

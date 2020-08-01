@@ -36,9 +36,19 @@ class ProductsController < ApplicationController
 
   def create
 
-    product = Product.create(product_params)
-    flash[:notice] = l(:notice_successful_create)
-    redirect_to products_path(:project_id =>  @project)
+    product = Product.new(product_params)
+    if(product.valid?)
+      product.save
+      flash[:notice] = l(:notice_successful_create)
+      redirect_to products_path(:project_id =>  @project)
+    else
+      puts "\n\n>>>>>>>>>>>>>>>>>"
+      puts " Errors full message is a: #{product.errors.full_messages.class }"
+      puts " Full message: #{product.errors.full_messages }"
+      puts "<<<<<<<<<<<<<<<<<\n\n\n"
+      flash[:error] = product.errors.full_messages[0]
+      redirect_to new_product_path(:project_id =>  @project)
+    end
   end
 
   def destroy
