@@ -4,13 +4,11 @@ class ProductsController < ApplicationController
 
   def index
     if params.has_key?(:name)
-      puts ">>>>\n\nYes there is a name in the parameters #{params[:name]}\n\n"
       @products = Product.title_includes(params[:name])
     else
       @products = Product.all
     end 
     if params.has_key?(:sort_title)
-      puts ">>>>\n\nYes there is a SORT in the parameters #{params[:sort_title]}\n\n"
       @products = @products.order(:title => params[:sort_title])
     end
   end
@@ -62,9 +60,6 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])  
   end
   def find_project
-    puts "\n\n FIND PROJECT>>>>>>>>>>>>"
-    puts params[:project_id]
-    puts "<<<<<<<<<<<<\n\n"
     # @project variable must be set before calling the authorize filter
     @project = Project.find(params[:project_id])
   end
